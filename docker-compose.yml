@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  app:
+    build: ./app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Atg@105pa
+      MYSQL_DATABASE: mydatabase
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
