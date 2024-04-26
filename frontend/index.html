@@ -6,6 +6,21 @@
     <title>Document</title>
 </head>
 <body>
-    Hello from frontend
+    <h1>Hello from frontend</h1>
+    <ul id="data-list"></ul>
+
+    <script>
+        fetch('http://localhost:8000/') // Assuming your Flask app is running on port 8000
+            .then(response => response.json())
+            .then(data => {
+                const dataList = document.getElementById('data-list');
+                data.forEach(row => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = row;
+                    dataList.appendChild(listItem);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
 </body>
 </html>

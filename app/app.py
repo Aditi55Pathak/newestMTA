@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 import mysql.connector
 import logging
 
@@ -18,7 +18,7 @@ def index():
         cursor.execute('SELECT * FROM mytable')
         data = cursor.fetchall()
         conn.close()
-        return str(data)
+        return jsonify(data)
     except Exception as e:
         logging.error(f"An error occurred: {e}")
         return "An error occurred while processing your request", 500
